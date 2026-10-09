@@ -3,7 +3,6 @@
 [user]
 	name = Jaycee Lydian
 	email = scragz@gmail.com
-	signingkey = /Users/scragz/.ssh/id_rsa.pub
 [color]
     diff = auto
     status = auto
@@ -125,9 +124,6 @@
     autocrlf = input
 	  editor = cot --wait
     whitespace = trailing-space,space-before-tab,indent-with-non-tab
-    # sshCommand = C:\\WINDOWS\\System32\\OpenSSH\\ssh.exe
-    # sshCommand = \"C:/Windows/System32/OpenSSH/ssh.exe\"
-    # sshCommand = /c/WINDOWS/System32/OpenSSH/ssh
 [apply]
     #whitespace = fix
 [diff]
@@ -144,17 +140,6 @@
     token = a6cccbca9805b91fc821f16b1e1c1765
 [diff "ruby"]
     funcname = ^ *\\(\\(class\\|module\\|def\\) .*\\)
-
-[credential "helperselector"]
-	selected = manager
-[credential]
-	preserve = 1
-	credentialStore = keychain
-	gitHubAuthModes = browser
-	helper = 
-	helper = /usr/local/share/gcm-core/git-credential-manager
-[credential "https://dev.azure.com"]
-	useHttpPath = true
 [pager]
 	branch = false
 [pull]
