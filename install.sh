@@ -9,6 +9,7 @@ mkdir -p "$ZAP_HOME"
 
 ln -sf "$DIR/.zshrc" ~/.zshrc
 ln -sf "$DIR/.zsh" ~/.zsh
+ln -sf "$DIR/.gitconfig" ~/.gitconfig
 
 # container-safe git signing via forwarded agent
 if key="$(ssh-add -L 2>/dev/null | grep -m1 '^ssh-')"; then

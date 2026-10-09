@@ -1,0 +1,165 @@
+[core]
+
+[user]
+	name = Jaycee Lydian
+	email = scragz@gmail.com
+	signingkey = /Users/scragz/.ssh/id_rsa.pub
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = red
+    untracked = cyan
+[alias]
+    # http://robots.thoughtbot.com/post/4747482956/streamline-your-git-workflow-with-aliases
+    # http://www.jukie.net/~bart/conf/gitconfig
+
+    st = status
+    s = status --short
+
+    br = branch
+
+    f = flow
+    fr = flow release
+    ff = flow feature
+    fh = flow hotfix
+
+    df = diff
+    ds = diff --stat
+    ix = diff --cached
+    staged = diff --cached
+    both = diff HEAD
+    w = whatchanged
+    last = log -1
+
+    # add hunks of code interactively
+    # useful for separating a bunch of changes into logical commits
+    patch = add --patch
+
+
+    co = checkout
+    cob = checkout -b
+
+    ci = commit
+    c = commit -m
+    # ci to last commit with same message
+    ca = commit --amend -C HEAD
+
+    # add
+    a = add
+    # updated/deleted (not new)
+    au = add -u
+    aa = !git add -u && git add . && git status
+
+    cds = !git ds --cached
+
+    ch = cherry -v origin
+
+
+    # some advanced shit
+
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+    # show conflicting merge in gitk:
+    gitkconflict = !gitk --left-right HEAD...MERGE_HEAD
+
+    # prune all tracking local branches that have been removed from remote:
+    prune-all = !git remote | xargs -n 1 git remote prune
+
+    # show full history in gitk (including "deleted" branches and stashes)
+    history-all = !gitk --all $( git fsck | awk '/dangling commit/ {print $3}' )
+
+    # show list of contributors in descending order by number of commits
+    rank = shortlog -sn --no-merges
+
+    # given a string for an author, try to figure out full name and email:
+    whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+
+    # given any git object, try to show it briefly
+    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+
+
+    # Search for a given string in all patches and print commit messages
+    # example: search for any commit that adds or removes string "foobar"
+    #     git searchcommits foobar
+    # example: search commits for string "foobar" in directory src/lib
+    #     git searchcommits foobar src/lib
+    # example: search commits for "foobar", print full diff of commit with 1 line context
+    #     git searchcommits foobar --pickaxe-all -U1 src/lib
+    searchcommits = "!f() { query=\"$1\"; shift; git log -S\"$query\" \"$@\"; }; f \"$@\""
+
+    # remove remote branch references that no longer exist, cleanup unnecessary git files, remove untracked files from the working tree and clear out your stash
+    cleanup = !git remote prune origin && git gc && git clean -df && git stash clear
+
+    # amend to a previous commit:
+    # git add file
+    # git fixup HEAD^^
+    # will put the changes to 'file' to the commit two behind HEAD
+    fixup = !sh -c 'git commit --fixup $1 && \
+    git stash && \
+    git rebase -i $1~1 && \
+    git stash pop' -
+
+    # local commits not in remote
+    unpushed = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git log origin/$PROJ_BRANCH..HEAD"
+    # remote commits not in local
+    unpulled = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git fetch && git log HEAD..origin/$PROJ_BRANCH"
+
+[core]
+    excludesfile = ~/.gitignore
+    legacyheaders = false
+    # editor = $EDITOR --wait
+    # pager = most +s +'/---'
+    autocrlf = input
+	  editor = cot --wait
+    whitespace = trailing-space,space-before-tab,indent-with-non-tab
+    # sshCommand = C:\\WINDOWS\\System32\\OpenSSH\\ssh.exe
+    # sshCommand = \"C:/Windows/System32/OpenSSH/ssh.exe\"
+    # sshCommand = /c/WINDOWS/System32/OpenSSH/ssh
+[apply]
+    #whitespace = fix
+[diff]
+    renames = copy
+[merge]
+    tool = opendiff
+[repack]
+    usedeltabaseoffset = true
+[push]
+	default = current
+	autoSetupRemote = true
+[github]
+    user = scragz
+    token = a6cccbca9805b91fc821f16b1e1c1765
+[diff "ruby"]
+    funcname = ^ *\\(\\(class\\|module\\|def\\) .*\\)
+
+[credential "helperselector"]
+	selected = manager
+[credential]
+	preserve = 1
+	credentialStore = keychain
+	gitHubAuthModes = browser
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[pager]
+	branch = false
+[pull]
+	rebase = false
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
