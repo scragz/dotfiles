@@ -5,7 +5,8 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 # zap
 ZAP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 mkdir -p "$ZAP_HOME"
-[ -d "$ZAP_HOME" ] || git clone --depth 1 -b release-v1 https://github.com/zap-zsh/zap.git "$ZAP_HOME"
+ZAP_DIR="${ZAP_HOME}/zap"
+[ -d "$ZAP_DIR" ] || git clone --depth 1 -b release-v1 https://github.com/zap-zsh/zap.git "$ZAP_DIR"
 
 ln -sf "$DIR/.zshrc" ~/.zshrc
 ln -sf "$DIR/.zsh" ~/.zsh
