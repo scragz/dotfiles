@@ -119,10 +119,8 @@
 [core]
     excludesfile = ~/.gitignore
     legacyheaders = false
-    # editor = $EDITOR --wait
-    # pager = most +s +'/---'
     autocrlf = input
-	  editor = cot --wait
+	  editor = ${EDITOR} --wait
     whitespace = trailing-space,space-before-tab,indent-with-non-tab
 [apply]
     #whitespace = fix
