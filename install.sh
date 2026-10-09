@@ -3,11 +3,9 @@ set -euo pipefail
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # zap
-git -C "$DIR" submodule update --init --depth 1
-mkdir -p ~/.local/share
 ZAP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 mkdir -p "$ZAP_HOME"
-ln -sfn "$DIR/zap" "$ZAP_HOME/zap"
+[ -d "$ZAP_HOME" ] || git clone --depth 1 -b release-v1 https://github.com/zap-zsh/zap.git "$ZAP_HOME"
 
 ln -sf "$DIR/.zshrc" ~/.zshrc
 ln -sf "$DIR/.zsh" ~/.zsh
@@ -19,3 +17,5 @@ if key="$(ssh-add -L 2>/dev/null | grep -m1 '^ssh-')"; then
 else
   git config --global commit.gpgsign false
 fi
+
+zsh -ic 'exit' >/dev/null 2>&1 || true

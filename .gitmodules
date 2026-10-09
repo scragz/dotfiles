@@ -1,4 +1,0 @@
-[submodule "zap"]
-	path = zap
-	url = https://github.com/zap-zsh/zap.git
-	ignore = untracked
