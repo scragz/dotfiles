@@ -135,7 +135,6 @@
 	autoSetupRemote = true
 [github]
     user = scragz
-    token = a6cccbca9805b91fc821f16b1e1c1765
 [diff "ruby"]
     funcname = ^ *\\(\\(class\\|module\\|def\\) .*\\)
 [pager]
